@@ -30,7 +30,7 @@ public class QuestionnaireController {
     private void sendEmail(QuestionnaireModel questionnaireModel) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("no-reply@gmail.com");
-        simpleMailMessage.setTo("bigshareua@gmail.com");
+        simpleMailMessage.setTo("bigshare@bigshare-agency.com");
         simpleMailMessage.setSubject("questionnaireRequest");
         simpleMailMessage.setText(questionnaireModel.toString());
         javaMailSender.send(simpleMailMessage);
