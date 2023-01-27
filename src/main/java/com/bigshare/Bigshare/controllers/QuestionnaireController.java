@@ -27,6 +27,6 @@ public class QuestionnaireController {
 
     @GetMapping(value = "/get")
     public String get() {
-        return "PUT";
+        return "PUT2";
     }
 }
