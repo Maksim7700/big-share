@@ -1,5 +1,9 @@
 package com.bigshare.Bigshare.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "questionnaire_form")
 public class QuestionnaireModel {
 
     private String comment;
@@ -7,7 +11,13 @@ public class QuestionnaireModel {
     private String email;
     private String name;
     private String phone;
+
+    @OneToOne
+    @JoinColumn(name = "questionnaire_id", nullable = false)
     private Questionnaire questionnaire;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     public QuestionnaireModel() {
     }
@@ -79,5 +89,13 @@ public class QuestionnaireModel {
                 ", phone='" + phone + '\'' +
                 ", questionnaire=" + questionnaire +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

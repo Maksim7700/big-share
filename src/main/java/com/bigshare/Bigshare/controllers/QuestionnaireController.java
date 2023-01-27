@@ -2,42 +2,31 @@ package com.bigshare.Bigshare.controllers;
 
 
 import com.bigshare.Bigshare.models.QuestionnaireModel;
+import com.bigshare.Bigshare.services.QuestionnaireModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class QuestionnaireController {
 
-    private final JavaMailSender javaMailSender;
+    private final QuestionnaireModelService questionnaireService;
 
     @Autowired
-    public QuestionnaireController(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
+    public QuestionnaireController(QuestionnaireModelService questionnaireService) {
+        this.questionnaireService = questionnaireService;
     }
 
     @PostMapping(value = "/questionnaire", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin("*")
     public ResponseEntity<String> postQuestionnaire(@RequestBody QuestionnaireModel questionnaireModel) {
-        sendEmail(questionnaireModel);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return questionnaireService.addQuestionnaire(questionnaireModel);
     }
 
-    private void sendEmail(QuestionnaireModel questionnaireModel) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("bigshare@bigshare-agency.com");
-        simpleMailMessage.setTo("bigshare@bigshare-agency.com");
-        simpleMailMessage.setSubject("Client request");
-        simpleMailMessage.setText(questionnaireModel.toString());
-        javaMailSender.send(simpleMailMessage);
-    }
 
     @GetMapping(value = "/get")
     public String get() {
-        return "GET";
+        return "PUT";
     }
 }
