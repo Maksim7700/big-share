@@ -12,7 +12,7 @@ public class QuestionnaireModel {
     private String name;
     private String phone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionnaire_id", nullable = false)
     private Questionnaire questionnaire;
     @Id
